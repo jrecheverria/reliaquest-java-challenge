@@ -34,14 +34,33 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Test
+    public void testGetAllEmployees() {
+        List<Employee> mockEmployees = List.of(
+                new Employee("1", "Tiger Nixon", "320800", "61", ""),
+                new Employee("2", "Garrett Winters", "170750", "63", ""),
+                new Employee("3", "Ashton Cox", "86000", "66", ""),
+                new Employee("4", "Cedric Kelly", "433060", "22", ""),
+                new Employee("5", "Airi Satou", "162700", "33", "")
+        );
+
+        EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", mockEmployees);
+
+        when(restTemplate.getForEntity(
+                ALL_EMPLOYEE_DATA_URL,
+                EmployeeResponse.class))
+                .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
+
+        List<Employee> employees = employeeService.getAllEmployees();
+        assertEquals(mockEmployees.size(), employees.size());
+        assertEquals(mockEmployees, employees);
+    }
+
+    @Test
     public void testGetEmployeeByID() {
-        // Define the mock employee data
         Employee mockEmployee = new Employee("1", "Tiger Nixon", "320800", "61", "");
 
-        // Define the mock EmployeeResponse
         EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", Arrays.asList(mockEmployee));
 
-        // Set up the mock RestTemplate behavior
         when(restTemplate.getForEntity(
                 EMPLOYEE_DATA_BY_ID_URL + mockEmployee.getId(),
                 EmployeeResponse.class))

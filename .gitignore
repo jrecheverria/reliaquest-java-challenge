@@ -8,3 +8,4 @@
 .gradletasknamecache
 .gradle/merge
 .gradle/task-cache
+/.idea

@@ -4,10 +4,7 @@ import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,11 +31,10 @@ public class EmployeeController implements IEmployeeController {
         return null;
     }
 
-
     @Override
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) {
-        return null;
+        return new ResponseEntity<>(employeeService.getEmployeeByID(id), HttpStatus.OK);
     }
 
     @Override
@@ -51,14 +47,17 @@ public class EmployeeController implements IEmployeeController {
         return null;
     }
 
+    @PostMapping("/create")
     @Override
-    public ResponseEntity<Employee> createEmployee(Map<String, Object> employeeInput) {
+    public ResponseEntity<Employee> createEmployee(final Map<String, Object> employeeInput) {
         return null;
+//        return new ResponseEntity<>(employeeService.createEmployee(employeeInput), HttpStatus.CREATED);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @Override
     public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) {
         return null;
+//        return new ResponseEntity<>(employeeService.deleteEmployeeByID(id), HttpStatus.OK);
     }
 }

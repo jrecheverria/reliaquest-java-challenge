@@ -1,28 +1,27 @@
 package com.example.rqchallenge.model;
 
-import com.example.rqchallenge.util.EmployeeDataDeserializer;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 @Getter
+@Setter
 public class EmployeeResponse {
     private final String status;
-    private final Object data;
-    private final String message;
+
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    private final List<Employee> data;
 
     @JsonCreator
     public EmployeeResponse(
             @JsonProperty("status") String status,
-            @JsonProperty("data") Object data,
-            @JsonProperty("message") String message
+            @JsonProperty("data") List<Employee> data
     ) {
         this.status = status;
         this.data = data;
-        this.message = message;
     }
 }

@@ -48,4 +48,8 @@ public class EmployeeService {
         List<Employee> data = responseEntity.getBody().getData();
         return data.get(0);
     }
+
+    public Integer getHighestSalary() {
+        return employeeManager.getHighestSalary();
+    }
 }

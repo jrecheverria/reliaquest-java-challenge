@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/v1/")
@@ -39,7 +40,12 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
-        return null;
+        try {
+            Integer salary = employeeService.getHighestSalary();
+            return ResponseEntity.ok(salary);
+        } catch (NoSuchElementException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @Override

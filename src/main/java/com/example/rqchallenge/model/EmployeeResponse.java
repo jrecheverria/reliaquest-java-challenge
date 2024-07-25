@@ -1,12 +1,16 @@
 package com.example.rqchallenge.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.example.rqchallenge.util.EmployeeDataDeserializer;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.LowerCaseStrategy.class)
 public class EmployeeResponse {
-    @JsonProperty("status")
     private String status;
-    @JsonProperty("data")
-    public Employee employee;
+
+    @JsonDeserialize(using = EmployeeDataDeserializer.class)
+    public Object data;
 }

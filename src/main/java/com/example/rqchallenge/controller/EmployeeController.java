@@ -56,7 +56,7 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     public ResponseEntity<Employee> createEmployee(Map<String, Object> employeeInput) {
-        return null;
+        return null
     }
 
     @Override

@@ -1,0 +1,10 @@
+# Gradle files
+/.gradle
+/build
+**/build/
+/gradle/
+/out/
+/!gradle/wrapper/gradle-wrapper.jar
+.gradletasknamecache
+.gradle/merge
+.gradle/task-cache

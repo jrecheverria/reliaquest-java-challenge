@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Objects;
-
 @Service
 public class EmployeeService {
     //Add caching
@@ -21,10 +19,11 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeByID(final String id) {
-        ResponseEntity<EmployeeResponse> employeeResponse = restTemplate.getForEntity(
+        ResponseEntity<EmployeeResponse> responseEntity = restTemplate.getForEntity(
                 EMPLOYEE_DATA_BY_ID_URL + id,
                 EmployeeResponse.class
         );
-        return employeeResponse.getBody().employee;
+        EmployeeResponse employeeResponse = responseEntity.getBody();
+        return (Employee) employeeResponse.getData();
     }
 }

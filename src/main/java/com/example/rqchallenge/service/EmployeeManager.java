@@ -6,10 +6,7 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 @Component
 @Getter
@@ -24,6 +21,13 @@ public class EmployeeManager {
         employeeList.stream().forEach(employee -> {
             employeePriorityQueue.add(employee); // Add to priority queue
         });
+    }
+
+    public Integer getHighestSalary() {
+        if (!employeePriorityQueue.isEmpty()) {
+            return Integer.parseInt(employeePriorityQueue.peek().getSalary());
+        }
+        throw new NoSuchElementException("No employees found in the priority queue.");
     }
 
 }

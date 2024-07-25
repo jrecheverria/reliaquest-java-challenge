@@ -18,19 +18,26 @@ public class EmployeeService {
     private static final String CREATE_EMPLOYEE_DATA_URL  = "https://dummy.restapiexample.com/api/v1/create";
 
     private final RestTemplate restTemplate;
-    private final ObjectMapper objectMapper = new ObjectMapper();
-    private final Map<String, Employee> employeeMap = new HashMap<>();
-    private final PriorityQueue<Employee> employeePriorityQueue = new PriorityQueue<>((e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
+    private final EmployeeManager employeeManager;
 
-    public EmployeeService(RestTemplate restTemplate) {
+
+
+    public EmployeeService(RestTemplate restTemplate, EmployeeManager employeeManager) {
         this.restTemplate = restTemplate;
+        this.employeeManager = employeeManager;
     }
 
     public List<Employee> getAllEmployees() {
         ResponseEntity<EmployeeResponse> responseEntity = restTemplate.getForEntity(
                 ALL_EMPLOYEE_DATA_URL,
                 EmployeeResponse.class);
-        return responseEntity.getBody().getData();
+
+        List<Employee> employeeList = responseEntity.getBody().getData();
+
+        if(employeeManager.getEmployeePriorityQueue().isEmpty()) {
+            employeeManager.populateEmployeeData(employeeList);
+        }
+        return employeeList;
     }
 
     public Employee getEmployeeByID(final String id) {

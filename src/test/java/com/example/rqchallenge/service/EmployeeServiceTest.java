@@ -76,21 +76,6 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void testGetEmployeeByID() {
-        Employee mockEmployee = mockEmployeeList.get(0);
-        EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", List.of((mockEmployee)));
-
-        when(restTemplate.getForEntity(
-                getEmployeeDataByIdUrl + mockEmployee.getId(),
-                EmployeeResponse.class))
-                .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
-
-        Employee employee = employeeService.getEmployeeByID("1");
-        assertEquals(mockEmployeeResponse.getData().size(), 1);
-        assertEquals(mockEmployeeResponse.getData().get(0).getId(), mockEmployee.getId());
-    }
-
-    @Test
     public void testGetEmployeesByNameSearch() {
         // We are replicating the result of the search string "on", which should be employees Ashton Cox and Tiger Nixon
         List<Employee> mockEmployeeListBySearchString = List.of(
@@ -108,6 +93,21 @@ public class EmployeeServiceTest {
         List<Employee> employees =  employeeService.getEmployeesByNameSearch("on");
 
         assertEquals(mockEmployeeListBySearchString, employees);
+    }
+
+    @Test
+    public void testGetEmployeeByID() {
+        Employee mockEmployee = mockEmployeeList.get(0);
+        EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", List.of((mockEmployee)));
+
+        when(restTemplate.getForEntity(
+                getEmployeeDataByIdUrl + mockEmployee.getId(),
+                EmployeeResponse.class))
+                .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
+
+        Employee employee = employeeService.getEmployeeByID("1");
+        assertEquals(mockEmployeeResponse.getData().size(), 1);
+        assertEquals(mockEmployeeResponse.getData().get(0).getId(), mockEmployee.getId());
     }
 
     @Test

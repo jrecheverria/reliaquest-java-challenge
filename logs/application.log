@@ -442,3 +442,70 @@ java.lang.NullPointerException: Cannot invoke "java.util.List.get(int)" because 
 2024-07-26 18:28:22 - Starting RqChallengeApplicationTests using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17447 (started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
 2024-07-26 18:28:22 - No active profile set, falling back to default profiles: default
 2024-07-26 18:28:23 - Started RqChallengeApplicationTests in 0.92 seconds (JVM running for 1.651)
+2024-07-26 18:29:00 - Starting RqChallengeApplicationTests using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17509 (started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:29:00 - No active profile set, falling back to default profiles: default
+2024-07-26 18:29:01 - Started RqChallengeApplicationTests in 1.108 seconds (JVM running for 1.859)
+2024-07-26 18:29:01 - No employees name matched whole executing getEmployeesByNameSearch(), returning empty list
+2024-07-26 18:29:09 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17530 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:29:09 - No active profile set, falling back to default profiles: default
+2024-07-26 18:29:09 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 18:29:09 - Starting service [Tomcat]
+2024-07-26 18:29:09 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 18:29:09 - Initializing Spring embedded WebApplicationContext
+2024-07-26 18:29:09 - Root WebApplicationContext: initialization completed in 489 ms
+2024-07-26 18:29:10 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 18:29:10 - Started RqChallengeApplication in 0.936 seconds (JVM running for 1.305)
+2024-07-26 18:30:57 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 18:30:57 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 18:30:57 - Completed initialization in 2 ms
+2024-07-26 18:30:59 - Successfully retrieved employee with id 8
+2024-07-26 18:31:05 - No employee data found while executing getHighestSalary(), returning 0
+2024-07-26 18:31:05 - Successfully fetched highest earnings of salary.
+2024-07-26 18:31:41 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17631 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:31:41 - No active profile set, falling back to default profiles: default
+2024-07-26 18:31:42 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 18:31:42 - Starting service [Tomcat]
+2024-07-26 18:31:42 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 18:31:42 - Initializing Spring embedded WebApplicationContext
+2024-07-26 18:31:42 - Root WebApplicationContext: initialization completed in 503 ms
+2024-07-26 18:31:42 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 18:31:42 - Started RqChallengeApplication in 0.96 seconds (JVM running for 1.386)
+2024-07-26 18:31:55 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 18:31:55 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 18:31:55 - Completed initialization in 1 ms
+2024-07-26 18:31:55 - Rest client error: 429 Too Many Requests: "{<LF>    "message": "Too Many Attempts."<LF>}"
+2024-07-26 18:32:26 - Successfully retrieved employee with id 9
+2024-07-26 18:32:40 - No employee data found while executing getHighestSalary(), returning 0
+2024-07-26 18:32:40 - Successfully fetched highest earnings of salary.
+2024-07-26 18:33:17 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17659 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:33:17 - No active profile set, falling back to default profiles: default
+2024-07-26 18:33:18 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 18:33:18 - Starting service [Tomcat]
+2024-07-26 18:33:18 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 18:33:18 - Initializing Spring embedded WebApplicationContext
+2024-07-26 18:33:18 - Root WebApplicationContext: initialization completed in 462 ms
+2024-07-26 18:33:18 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 18:33:18 - Started RqChallengeApplication in 0.915 seconds (JVM running for 1.311)
+2024-07-26 18:33:26 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 18:33:26 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 18:33:26 - Completed initialization in 1 ms
+2024-07-26 18:33:27 - Rest client error: 429 Too Many Requests: "{<LF>    "message": "Too Many Attempts."<LF>}"
+2024-07-26 18:34:27 - Successfully retrieved employee with id 9
+2024-07-26 18:34:33 - Successfully fetched highest earnings of salary.
+2024-07-26 18:36:08 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17692 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:36:08 - No active profile set, falling back to default profiles: default
+2024-07-26 18:36:08 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 18:36:08 - Starting service [Tomcat]
+2024-07-26 18:36:08 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 18:36:08 - Initializing Spring embedded WebApplicationContext
+2024-07-26 18:36:08 - Root WebApplicationContext: initialization completed in 476 ms
+2024-07-26 18:36:09 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 18:36:09 - Started RqChallengeApplication in 0.917 seconds (JVM running for 1.279)
+2024-07-26 18:36:33 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 18:36:33 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 18:36:33 - Completed initialization in 2 ms
+2024-07-26 18:36:34 - Successfully retrieved all employees
+2024-07-26 18:36:43 - Successfully retrieved all employees by search string Tiger
+2024-07-26 18:36:47 - Successfully retrieved all employees by search string Ti
+2024-07-26 18:36:52 - Successfully retrieved all employees by search string ig
+2024-07-26 18:36:56 - Successfully retrieved all employees by search string o

@@ -26,7 +26,7 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     @GetMapping()
-    public ResponseEntity<List<Employee>> getAllEmployees() throws IOException {
+    public ResponseEntity<List<Employee>> getAllEmployees() {
         ResponseEntity<List<Employee>> employees = new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
         logger.info("Successfully retrieved all employees");
         return employees;

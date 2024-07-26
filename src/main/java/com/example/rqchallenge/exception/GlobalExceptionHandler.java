@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
     }
 
     //Exception for processing a request
+    @ExceptionHandler(IOException.class)
     public ResponseEntity<String> handleIOException(IOException ex) {
         logger.error("IOException occurred: {}", ex.getMessage());
         return new ResponseEntity<>("An error occurred while processing the request", HttpStatus.INTERNAL_SERVER_ERROR);

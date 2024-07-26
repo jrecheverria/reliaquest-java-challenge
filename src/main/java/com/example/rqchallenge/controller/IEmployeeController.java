@@ -12,13 +12,13 @@ import java.util.Map;
 public interface IEmployeeController {
 
     @GetMapping()
-    ResponseEntity<List<Employee>> getAllEmployees() throws IOException;
+    ResponseEntity<List<Employee>> getAllEmployees();
 
     @GetMapping("/search/{searchString}")
-    ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString);
+    ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) throws IOException;
 
     @GetMapping("/{id}")
-    ResponseEntity<Employee> getEmployeeById(@PathVariable String id);
+    ResponseEntity<Employee> getEmployeeById(@PathVariable String id) throws IOException;
 
     @GetMapping("/highestSalary")
     ResponseEntity<Integer> getHighestSalaryOfEmployees();
@@ -30,6 +30,6 @@ public interface IEmployeeController {
     ResponseEntity<String> createEmployee(@RequestBody Map<String, Object> employeeInput);
 
     @DeleteMapping("/{id}")
-    ResponseEntity<String> deleteEmployeeById(@PathVariable String id);
+    ResponseEntity<String> deleteEmployeeById(@PathVariable String id) throws IOException;
 
 }

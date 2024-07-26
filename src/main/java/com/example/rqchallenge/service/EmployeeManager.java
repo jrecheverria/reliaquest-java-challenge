@@ -1,8 +1,11 @@
 package com.example.rqchallenge.service;
 
+import com.example.rqchallenge.controller.EmployeeController;
 import com.example.rqchallenge.model.Employee;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -22,6 +25,8 @@ public class EmployeeManager {
     //Inverted Index for quick text search
     private final Map<String, Set<Employee>> invertedIndex = new HashMap<>();
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
 
     public void populateEmployeeData(List<Employee> employeeList) {
         employeeList.forEach(employee -> {
@@ -39,11 +44,12 @@ public class EmployeeManager {
         if (!employeeTreeSet.isEmpty()) {
             return Integer.parseInt(employeeTreeSet.first().getSalary());
         }
-        throw new NoSuchElementException("No employees found in the data set.");
+        logger.info("No employee data found, returning 0");
+        return 0;
     }
 
     public List<String> getTopTenHighestEarningEmployeeNames() {
-        if (employeeTreeSet.size() >= 10) {
+        if (!employeeTreeSet.isEmpty()) {
             List<String> topEmployees = new ArrayList<>();
             Iterator<Employee> iterator = employeeTreeSet.iterator();
 
@@ -54,7 +60,8 @@ public class EmployeeManager {
             }
             return topEmployees;
         }
-        throw new NoSuchElementException("Not enough employees found in data to retrieve top 10 salaries.");
+        logger.info("No employee data found, returning empty list");
+        return new ArrayList<>();
     }
 
     public List<Employee> getEmployeesByNameSearch(String searchString) {

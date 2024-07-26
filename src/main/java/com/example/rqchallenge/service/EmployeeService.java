@@ -32,7 +32,7 @@ public class EmployeeService {
 
         List<Employee> employeeList = responseEntity.getBody().getData();
 
-        if(employeeManager.getEmployeePriorityQueue().isEmpty()) {
+        if(employeeManager.getEmployeeTreeSet().isEmpty()) {
             employeeManager.populateEmployeeData(employeeList);
         }
         return employeeList;

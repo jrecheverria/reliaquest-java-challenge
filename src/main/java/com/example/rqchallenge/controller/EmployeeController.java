@@ -33,11 +33,12 @@ public class EmployeeController implements IEmployeeController {
     }
 
     @Override
-    @GetMapping("/employee/{id}")
+    @GetMapping("/employees/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) {
         return new ResponseEntity<>(employeeService.getEmployeeByID(id), HttpStatus.OK);
     }
 
+    @GetMapping("/employees/top-salary")
     @Override
     public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
         try {
@@ -48,6 +49,7 @@ public class EmployeeController implements IEmployeeController {
         }
     }
 
+    @GetMapping("/employees/top-ten-names-by-salary")
     @Override
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
         try {
@@ -58,14 +60,14 @@ public class EmployeeController implements IEmployeeController {
         }
     }
 
-    @PostMapping("/create")
+    @PostMapping("/employees/create")
     @Override
     public ResponseEntity<Employee> createEmployee(final Map<String, Object> employeeInput) {
         return null;
 //        return new ResponseEntity<>(employeeService.createEmployee(employeeInput), HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/employees/{id}")
     @Override
     public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) {
         return null;

@@ -435,3 +435,10 @@ java.lang.NullPointerException: Cannot invoke "java.util.List.get(int)" because 
 2024-07-26 18:08:08 - Rest client error: 429 Too Many Requests: "{<LF>    "message": "Too Many Attempts."<LF>}"
 2024-07-26 18:11:47 - Successfully retrieved all employees by search string t
 2024-07-26 18:12:05 - Successfully fetched top ten earning employee names.
+2024-07-26 18:27:05 - Starting RqChallengeApplicationTests using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17402 (started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:27:05 - No active profile set, falling back to default profiles: default
+2024-07-26 18:27:06 - Started RqChallengeApplicationTests in 0.951 seconds (JVM running for 1.641)
+2024-07-26 18:27:06 - No employees name matched whole executing getEmployeesByNameSearch(), returning empty list
+2024-07-26 18:28:22 - Starting RqChallengeApplicationTests using Java 15.0.10 on Rubens-MacBook-Air.local with PID 17447 (started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 18:28:22 - No active profile set, falling back to default profiles: default
+2024-07-26 18:28:23 - Started RqChallengeApplicationTests in 0.92 seconds (JVM running for 1.651)

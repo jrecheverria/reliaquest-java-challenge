@@ -71,7 +71,7 @@ class EmployeeManagerTest {
         String name = "Jon";
         List<String> tokens = employeeManager.tokenizeEmployeeName(name);
         List<String> expectedTokens = Arrays.asList(
-                "J", "Jo", "Jon", "o", "on", "n"
+                "j", "jo", "jon", "o", "on", "n"
         );
         assertEquals(expectedTokens, tokens);
     }

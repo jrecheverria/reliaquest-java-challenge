@@ -168,8 +168,6 @@ public class EmployeeServiceTest {
         )).thenReturn(new ResponseEntity<>(new EmployeeResponse("success", newEmployeeList), HttpStatus.OK));
 
         mockEmployeeMap.put("6", newEmployeeList.get(0));
-        when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
-        when(employeeManager.getEmployeeTreeSet()).thenReturn(new TreeSet<>(Comparator.comparing(Employee::getId)));
 
         assertEquals(employeeService.createEmployee(newEmployeeData), "success");
         assertTrue(mockEmployeeMap.containsKey("6"));
@@ -185,7 +183,6 @@ public class EmployeeServiceTest {
         )).thenReturn(new ResponseEntity<>(new DeleteEmployeeResponse("success", "Successfully! Record has been deleted"), HttpStatus.OK));
 
         mockEmployeeMap.remove("1");
-        when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
 
         assertEquals(employeeService.deleteEmployeeByID("1"), "Successfully! Record has been deleted");
         assertTrue(!mockEmployeeMap.containsKey("1"));

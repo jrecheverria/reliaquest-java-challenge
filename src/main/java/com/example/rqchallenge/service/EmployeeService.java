@@ -98,11 +98,10 @@ public class EmployeeService {
                 EmployeeResponse.class
         );
         String successStatus = responseEntity.getBody().getStatus();
-        Employee employee = responseEntity.getBody().getData().get(0);
 
-        //Adding the new employee to our data structures
-        employeeManager.getEmployeeMap().put(employee.getId(), employee);
-        employeeManager.getEmployeeTreeSet().add(employee);
+        //We will add the new employee to our cache
+        Employee employee = responseEntity.getBody().getData().get(0);
+        employeeManager.addEmployee(employee);
 
         return successStatus;
     }
@@ -120,12 +119,7 @@ public class EmployeeService {
         );
 
         //If the employee happens to exist in our "cache", well remove it
-        if(employeeManager.getEmployeeMap().containsKey(id)) {
-            Employee employee = employeeManager.getEmployeeMap().get(id);
-
-            employeeManager.getEmployeeMap().remove(id);
-            employeeManager.getEmployeeTreeSet().remove(employee);
-        }
+        employeeManager.removeEmployee(id);
         return responseEntity.getBody().getMessage();
     }
 }

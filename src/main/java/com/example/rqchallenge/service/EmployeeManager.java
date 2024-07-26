@@ -85,4 +85,22 @@ public class EmployeeManager {
         }
         return tokens;
     }
+
+    public void addEmployee(Employee employee) {
+        employeeMap.put(employee.getId(), employee);
+        employeeTreeSet.add(employee);
+
+        String name = employee.getName().toLowerCase();
+        for (String token : tokenizeEmployeeName(name)) {
+            invertedIndex.computeIfAbsent(token, k -> new HashSet<>()).add(employee);
+        }
+    }
+
+    public void removeEmployee(final String id) {
+        if (employeeMap.containsKey(id)) {
+            Employee employee = employeeMap.get(id);
+            employeeMap.remove(id);
+            employeeTreeSet.remove(employee);
+        }
+    }
 }

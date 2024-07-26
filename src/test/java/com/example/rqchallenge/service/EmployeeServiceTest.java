@@ -91,7 +91,27 @@ public class EmployeeServiceTest {
     }
 
     @Test
-    public void getHighestSalary() {
+    public void testGetEmployeesByNameSearch() {
+        // We are replicating the result of the search string "on", which should be employees Ashton Cox and Tiger Nixon
+        List<Employee> mockEmployeeListBySearchString = List.of(
+                mockEmployeeList.get(0),
+                mockEmployeeList.get(2)
+        );
+
+        when(employeeManager.getEmployeesByNameSearch("on")).thenReturn(mockEmployeeListBySearchString);
+        // Mock the call to getAllEmployees
+        when(restTemplate.getForEntity(
+                getAllEmployeeDataUrl,
+                EmployeeResponse.class))
+                .thenReturn(new ResponseEntity<>(new EmployeeResponse("success", mockEmployeeList), HttpStatus.OK));
+
+        List<Employee> employees =  employeeService.getEmployeesByNameSearch("on");
+
+        assertEquals(mockEmployeeListBySearchString, employees);
+    }
+
+    @Test
+    public void testGetHighestSalary() {
         when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
         when(employeeManager.getHighestSalary()).thenReturn(433060); //Highest salary in test data belongs to Cedric
 

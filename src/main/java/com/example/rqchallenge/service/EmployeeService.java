@@ -3,11 +3,14 @@ package com.example.rqchallenge.service;
 import com.example.rqchallenge.model.DeleteEmployeeResponse;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.model.EmployeeResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeService {
@@ -52,8 +55,10 @@ public class EmployeeService {
                 GET_EMPLOYEE_DATA_BY_ID_URL + id,
                 EmployeeResponse.class
         );
+
         Employee employee = responseEntity.getBody().getData().get(0);
         employeeManager.getEmployeeMap().put(id, employee);
+
         return employee;
     }
 
@@ -77,9 +82,9 @@ public class EmployeeService {
                 EmployeeResponse.class
         );
         String successStatus = responseEntity.getBody().getStatus();
+        Employee employee = responseEntity.getBody().getData().get(0);
 
         //Adding the new employee to our data structures
-        Employee employee = responseEntity.getBody().getData().get(0);
         employeeManager.getEmployeeMap().put(employee.getId(), employee);
         employeeManager.getEmployeeTreeSet().add(employee);
         employeeManager.getEmployeeNameMap().put(employee.getName(), employee);

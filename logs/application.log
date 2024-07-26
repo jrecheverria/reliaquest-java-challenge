@@ -1,0 +1,98 @@
+2024-07-26 00:33:33 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-Air.lan with PID 7696 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 00:33:33 - No active profile set, falling back to default profiles: default
+2024-07-26 00:33:34 - Started RqChallengeApplication in 0.94 seconds (JVM running for 1.452)
+2024-07-26 00:33:44 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-Air.lan with PID 7700 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 00:33:44 - No active profile set, falling back to default profiles: default
+2024-07-26 00:33:45 - Started RqChallengeApplication in 1.507 seconds (JVM running for 1.905)
+2024-07-26 00:33:58 - Successfully fetched employee with ID: 1
+2024-07-26 00:37:05 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-Air.lan with PID 7782 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 00:37:05 - No active profile set, falling back to default profiles: default
+2024-07-26 00:37:06 - Started RqChallengeApplication in 1.851 seconds (JVM running for 2.303)
+2024-07-26 00:38:58 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-Air.lan with PID 7814 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 00:38:58 - No active profile set, falling back to default profiles: default
+2024-07-26 00:38:59 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 00:38:59 - Starting service [Tomcat]
+2024-07-26 00:38:59 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 00:38:59 - Initializing Spring embedded WebApplicationContext
+2024-07-26 00:38:59 - Root WebApplicationContext: initialization completed in 794 ms
+2024-07-26 00:38:59 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 00:38:59 - Started RqChallengeApplication in 1.485 seconds (JVM running for 1.999)
+2024-07-26 00:39:06 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 00:39:06 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 00:39:06 - Completed initialization in 2 ms
+2024-07-26 00:39:07 - Successfully retrieved all employees
+2024-07-26 00:39:56 - Starting RqChallengeApplication using Java 15.0.10 on Rubens-Air.lan with PID 7823 (/Users/rubenecheverria/IdeaProjects/java-employee-challenge/build/classes/java/main started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 00:39:56 - No active profile set, falling back to default profiles: default
+2024-07-26 00:39:56 - Tomcat initialized with port(s): 8080 (http)
+2024-07-26 00:39:56 - Starting service [Tomcat]
+2024-07-26 00:39:56 - Starting Servlet engine: [Apache Tomcat/9.0.55]
+2024-07-26 00:39:56 - Initializing Spring embedded WebApplicationContext
+2024-07-26 00:39:56 - Root WebApplicationContext: initialization completed in 464 ms
+2024-07-26 00:39:56 - Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-26 00:39:56 - Started RqChallengeApplication in 0.906 seconds (JVM running for 1.372)
+2024-07-26 00:40:00 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-26 00:40:00 - Initializing Servlet 'dispatcherServlet'
+2024-07-26 00:40:00 - Completed initialization in 1 ms
+2024-07-26 00:40:01 - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.web.client.HttpClientErrorException$TooManyRequests: 429 Too Many Requests: "{<LF>    "message": "Too Many Attempts."<LF>}"] with root cause
+org.springframework.web.client.HttpClientErrorException$TooManyRequests: 429 Too Many Requests: "{<LF>    "message": "Too Many Attempts."<LF>}"
+	at org.springframework.web.client.HttpClientErrorException.create(HttpClientErrorException.java:137)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:168)
+	at org.springframework.web.client.DefaultResponseErrorHandler.handleError(DefaultResponseErrorHandler.java:122)
+	at org.springframework.web.client.ResponseErrorHandler.handleError(ResponseErrorHandler.java:63)
+	at org.springframework.web.client.RestTemplate.handleResponse(RestTemplate.java:819)
+	at org.springframework.web.client.RestTemplate.doExecute(RestTemplate.java:777)
+	at org.springframework.web.client.RestTemplate.execute(RestTemplate.java:711)
+	at org.springframework.web.client.RestTemplate.getForEntity(RestTemplate.java:361)
+	at com.example.rqchallenge.service.EmployeeService.getAllEmployees(EmployeeService.java:31)
+	at com.example.rqchallenge.controller.EmployeeController.getAllEmployees(EmployeeController.java:30)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1067)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:655)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1722)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2024-07-26 00:40:57 - Successfully retrieved all employees

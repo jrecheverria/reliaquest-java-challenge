@@ -44,7 +44,7 @@ public class EmployeeManager {
         if (!employeeTreeSet.isEmpty()) {
             return Integer.parseInt(employeeTreeSet.first().getSalary());
         }
-        throw new NoSuchElementException("No employees found in the priority queue.");
+        throw new NoSuchElementException("No employees found in the data set.");
     }
 
     public List<String> getTopTenHighestEarningEmployeeNames() {

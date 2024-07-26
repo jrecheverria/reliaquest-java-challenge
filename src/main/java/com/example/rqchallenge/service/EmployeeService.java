@@ -49,7 +49,9 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeesByNameSearch(final String searchString) {
+        //If a user tries to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
         if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
+
         return employeeManager.getEmployeesByNameSearch(searchString);
     }
 
@@ -73,12 +75,14 @@ public class EmployeeService {
     public Integer getHighestSalary() {
         //If a user tries to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
         if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
+
         return employeeManager.getHighestSalary();
     }
 
     public List<String> getTopTenHighestEarningEmployeeNames() {
         //If a user tries to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
         if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
+
         return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 

@@ -48,6 +48,7 @@ public class EmployeeManager {
         return 0;
     }
 
+    // I changed this method to still retrieve the highest earning employees, even if there isnt 10 data points to fetch
     public List<String> getTopTenHighestEarningEmployeeNames() {
         if (!employeeTreeSet.isEmpty()) {
             List<String> topEmployees = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.example.rqchallenge.service;
 
+import com.example.rqchallenge.model.DeleteEmployeeResponse;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.model.EmployeeResponse;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,13 +10,14 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -126,5 +128,66 @@ public class EmployeeServiceTest {
         Integer highestSalary = employeeService.getHighestSalary();
         assertEquals(433060, highestSalary);
         verify(employeeManager).getHighestSalary();
+    }
+
+    @Test
+    public void testGetTopTenHighestEarningEmployeeNames() {
+        List<String> topXEarningNames = mockEmployeeList.stream()
+                .sorted((e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())))
+                .map(Employee::getName)
+                .limit(10)
+                .collect(Collectors.toList());
+
+        when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
+        when(employeeManager.getTopTenHighestEarningEmployeeNames()).thenReturn(topXEarningNames);
+
+        List<String> employeeNames = employeeService.getTopTenHighestEarningEmployeeNames();
+
+        assertEquals(topXEarningNames, employeeNames);
+    }
+
+    @Test
+    public void testCreateEmployee() {
+        Map<String, Object> newEmployeeData = Map.of(
+                "name", "Jon Snow",
+                "salary", "100000",
+                "age", "28"
+        );
+        List<Employee> newEmployeeList = List.of(new Employee("6", "Jon Snow", "100000", "28", "Castle_Black.jpg"));
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(newEmployeeData, headers);
+
+        when(restTemplate.exchange(
+            createEmployeeDataUrl,
+            HttpMethod.POST,
+            requestEntity,
+            EmployeeResponse.class
+        )).thenReturn(new ResponseEntity<>(new EmployeeResponse("success", newEmployeeList), HttpStatus.OK));
+
+        mockEmployeeMap.put("6", newEmployeeList.get(0));
+        when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
+        when(employeeManager.getEmployeeTreeSet()).thenReturn(new TreeSet<>(Comparator.comparing(Employee::getId)));
+
+        assertEquals(employeeService.createEmployee(newEmployeeData), "success");
+        assertTrue(mockEmployeeMap.containsKey("6"));
+    }
+
+    @Test
+    public void testDeleteEmployee() {
+        when(restTemplate.exchange(
+                deleteEmployeeDataByIdUrl + "1",
+                HttpMethod.DELETE,
+                null,
+                DeleteEmployeeResponse.class
+        )).thenReturn(new ResponseEntity<>(new DeleteEmployeeResponse("success", "Successfully! Record has been deleted"), HttpStatus.OK));
+
+        mockEmployeeMap.remove("1");
+        when(employeeManager.getEmployeeMap()).thenReturn(mockEmployeeMap);
+
+        assertEquals(employeeService.deleteEmployeeByID("1"), "Successfully! Record has been deleted");
+        assertTrue(!mockEmployeeMap.containsKey("1"));
     }
 }

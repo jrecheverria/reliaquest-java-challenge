@@ -3,6 +3,7 @@ package com.example.rqchallenge.service;
 import com.example.rqchallenge.model.DeleteEmployeeResponse;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.model.EmployeeResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -13,10 +14,17 @@ import java.util.Map;
 
 @Service
 public class EmployeeService {
-    private static final String GET_ALL_EMPLOYEE_DATA_URL = "https://dummy.restapiexample.com/api/v1/employees";
-    private static final String GET_EMPLOYEE_DATA_BY_ID_URL = "https://dummy.restapiexample.com/api/v1/employee/";
-    private static final String DELETE_EMPLOYEE_DATA_BY_ID_URL = "https://dummy.restapiexample.com/api/v1/delete/";
-    private static final String CREATE_EMPLOYEE_DATA_URL  = "https://dummy.restapiexample.com/api/v1/create";
+    @Value("${employee.api.getAll.url}")
+    private String getAllEmployeeDataUrl;
+
+    @Value("${employee.api.getById.url}")
+    private String getEmployeeDataByIdUrl;
+
+    @Value("${employee.api.deleteById.url}")
+    private String deleteEmployeeDataByIdUrl;
+
+    @Value("${employee.api.create.url}")
+    private String createEmployeeDataUrl;
 
     private final RestTemplate restTemplate;
     private final EmployeeManager employeeManager;
@@ -28,7 +36,7 @@ public class EmployeeService {
 
     public List<Employee> getAllEmployees() throws RestClientException {
         ResponseEntity<EmployeeResponse> responseEntity = restTemplate.getForEntity(
-                GET_ALL_EMPLOYEE_DATA_URL,
+                getAllEmployeeDataUrl,
                 EmployeeResponse.class);
 
         List<Employee> employeeList = responseEntity.getBody().getData();
@@ -45,14 +53,14 @@ public class EmployeeService {
         return employeeManager.getEmployeesByNameSearch(searchString);
     }
 
-    public Employee getEmployeeByID(final String id) {
+    public Employee getEmployeeByID(final String id) throws RestClientException {
         // If employee already exists in our system, we can return the value from our "cache"
         if(employeeManager.getEmployeeMap().containsKey(id)) {
             return employeeManager.getEmployeeMap().get(id);
         }
 
         ResponseEntity<EmployeeResponse> responseEntity = restTemplate.getForEntity(
-                GET_EMPLOYEE_DATA_BY_ID_URL + id,
+                getEmployeeDataByIdUrl + id,
                 EmployeeResponse.class
         );
 
@@ -63,24 +71,24 @@ public class EmployeeService {
     }
 
     public Integer getHighestSalary() {
-        //If a user trys to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
+        //If a user tries to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
         if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
         return employeeManager.getHighestSalary();
     }
 
     public List<String> getTopTenHighestEarningEmployeeNames() {
-        //If a user trys to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
+        //If a user tries to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
         if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
         return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 
-    public String createEmployee(final Map<String, Object> employeeInput) {
+    public String createEmployee(final Map<String, Object> employeeInput) throws RestClientException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<Map<String, Object>> requestEntity = new HttpEntity<>(employeeInput, headers);
         ResponseEntity<EmployeeResponse> responseEntity = restTemplate.exchange(
-                CREATE_EMPLOYEE_DATA_URL,
+                createEmployeeDataUrl,
                 HttpMethod.POST,
                 requestEntity,
                 EmployeeResponse.class
@@ -103,7 +111,7 @@ public class EmployeeService {
     */
     public String deleteEmployeeByID(final String id) throws RestClientException {
         ResponseEntity<DeleteEmployeeResponse> responseEntity = restTemplate.exchange(
-                DELETE_EMPLOYEE_DATA_BY_ID_URL + id,
+                deleteEmployeeDataByIdUrl + id,
                 HttpMethod.DELETE,
                 null,
                 DeleteEmployeeResponse.class

@@ -60,17 +60,16 @@ public class EmployeeController implements IEmployeeController {
         }
     }
 
-    @PostMapping("/employees/create")
+    @PostMapping("/employees")
     @Override
-    public ResponseEntity<Employee> createEmployee(final Map<String, Object> employeeInput) {
-        return null;
-//        return new ResponseEntity<>(employeeService.createEmployee(employeeInput), HttpStatus.CREATED);
+    public ResponseEntity<String> createEmployee(final Map<String, Object> employeeInput) {
+        return new ResponseEntity<>(employeeService.createEmployee(employeeInput), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/employees/{id}")
     @Override
     public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) {
-        return null;
+        return new ResponseEntity<>(employeeService.deleteEmployeeByID(id), HttpStatus.OK);
 //        return new ResponseEntity<>(employeeService.deleteEmployeeByID(id), HttpStatus.OK);
     }
 }

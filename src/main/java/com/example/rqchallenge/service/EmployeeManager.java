@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Component
@@ -13,13 +12,17 @@ import java.util.*;
 @Setter
 public class EmployeeManager {
 
+    //Two data structures to act as a sort of caching mechanism to save time on our API call
+    //HashMap for quick lookup based on employee ID
+    private final Map<String, Employee> employeeMap = new HashMap<>();
+    //TreeSet for constant order and quick look up of employees based on salary
     private final TreeSet<Employee> employeeTreeSet = new TreeSet<>(
-            (e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
-
+                (e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
 
     public void populateEmployeeData(List<Employee> employeeList) {
-        employeeList.stream().forEach(employee -> {
-            employeeTreeSet.add(employee); // Add to priority queue
+        employeeList.forEach(employee -> {
+            employeeMap.put(employee.getId(), employee);
+            employeeTreeSet.add(employee);
         });
     }
 
@@ -44,5 +47,4 @@ public class EmployeeManager {
         }
         throw new NoSuchElementException("Not enough employees found in data to retrieve top 10 salaries.");
     }
-
 }

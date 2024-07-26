@@ -16,8 +16,8 @@ public class EmployeeDeserializer extends JsonDeserializer<Employee> {
 
         String id = getJsonNodeText(rootNode, "id");
         String name = fetchJsonNodeAlias(rootNode, "employee_name", "name");
-        String salary = getJsonNodeText(rootNode, "employee_salary");
-        String age = getJsonNodeText(rootNode, "employee_age");
+        String salary = fetchJsonNodeAlias(rootNode, "employee_salary", "salary");
+        String age = fetchJsonNodeAlias(rootNode, "employee_age", "age");
         String profileImage = getJsonNodeText(rootNode, "profile_image");
 
         return new Employee(id, name, salary, age, profileImage);

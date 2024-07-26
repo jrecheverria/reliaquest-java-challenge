@@ -72,22 +72,22 @@ public class EmployeeServiceTest {
                 .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
 
         List<Employee> employees = employeeService.getAllEmployees();
-        assertEquals(mockEmployeeResponse.getData().size(), mockEmployeeList.size());
+        assertEquals(mockEmployeeResponse.getData().size(), employees.size());
     }
 
     @Test
     public void testGetEmployeeByID() {
-//        Employee mockEmployee = new Employee("1", "Tiger Nixon", "320800", "61", "");
-//
-//        EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", Arrays.asList(mockEmployee));
-//
-//        when(restTemplate.getForEntity(
-//                getEmployeeDataByIdUrl + mockEmployee.getId(),
-//                EmployeeResponse.class))
-//                .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
-//
-//        Employee employee = employeeService.getEmployeeByID("1");
-//        assertEquals(mockEmployee, employee);
+        Employee mockEmployee = mockEmployeeList.get(0);
+        EmployeeResponse mockEmployeeResponse = new EmployeeResponse("success", List.of((mockEmployee)));
+
+        when(restTemplate.getForEntity(
+                getEmployeeDataByIdUrl + mockEmployee.getId(),
+                EmployeeResponse.class))
+                .thenReturn(new ResponseEntity<>(mockEmployeeResponse, HttpStatus.OK));
+
+        Employee employee = employeeService.getEmployeeByID("1");
+        assertEquals(mockEmployeeResponse.getData().size(), 1);
+        assertEquals(mockEmployeeResponse.getData().get(0).getId(), mockEmployee.getId());
     }
 
     @Test

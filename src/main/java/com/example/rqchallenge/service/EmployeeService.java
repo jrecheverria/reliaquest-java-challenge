@@ -99,7 +99,6 @@ public class EmployeeService {
         //Adding the new employee to our data structures
         employeeManager.getEmployeeMap().put(employee.getId(), employee);
         employeeManager.getEmployeeTreeSet().add(employee);
-        employeeManager.getEmployeeNameMap().put(employee.getName(), employee);
 
         return successStatus;
     }
@@ -119,9 +118,9 @@ public class EmployeeService {
         //If the employee happens to exist in our "cache", well remove it
         if(employeeManager.getEmployeeMap().containsKey(id)) {
             Employee employee = employeeManager.getEmployeeMap().get(id);
+
             employeeManager.getEmployeeMap().remove(id);
             employeeManager.getEmployeeTreeSet().remove(employee);
-            employeeManager.getEmployeeNameMap().remove(employee.getName());
         }
         return responseEntity.getBody().getMessage();
     }

@@ -22,32 +22,24 @@ public class EmployeeManager {
     private final TreeSet<Employee> employeeTreeSet = new TreeSet<>(
                 (e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
 
-    //Inverted Index for quick text search
+    //Inverted Index for quick text search based on employee name tokens
     private final Map<String, Set<Employee>> invertedIndex = new HashMap<>();
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
     public void populateEmployeeData(List<Employee> employeeList) {
-        employeeList.forEach(employee -> {
-            employeeMap.put(employee.getId(), employee);
-            employeeTreeSet.add(employee);
-
-            String name = employee.getName().toLowerCase();
-            for (String token : tokenizeEmployeeName(name)) {
-                invertedIndex.computeIfAbsent(token, k -> new HashSet<>()).add(employee);
-            }
-        });
+        employeeList.forEach(this::addEmployee);
     }
 
     public Integer getHighestSalary() {
         if (!employeeTreeSet.isEmpty()) {
             return Integer.parseInt(employeeTreeSet.first().getSalary());
         }
-        logger.info("No employee data found, returning 0");
+        logger.info("No employee data found while executing getHighestSalary(), returning 0");
         return 0;
     }
 
-    // I changed this method to still retrieve the highest earning employees, even if there isnt 10 data points to fetch
+    // I changed this method to still retrieve the highest earning employees, even if there isn't 10 data points to fetch
     public List<String> getTopTenHighestEarningEmployeeNames() {
         if (!employeeTreeSet.isEmpty()) {
             List<String> topEmployees = new ArrayList<>();
@@ -60,7 +52,7 @@ public class EmployeeManager {
             }
             return topEmployees;
         }
-        logger.info("No employee data found, returning empty list");
+        logger.info("No employee data found while executing getTopTenHighestEarningEmployeeNames(), returning empty list");
         return new ArrayList<>();
     }
 
@@ -70,14 +62,16 @@ public class EmployeeManager {
 
         if (invertedIndex.containsKey(searchString)) {
             result.addAll(invertedIndex.get(searchString));
+            return new ArrayList<>(result);
         }
-        return new ArrayList<>(result);
+        logger.info("No employees name matched whole executing getEmployeesByNameSearch(), returning empty list");
+        return new ArrayList<>();
     }
 
-    //Tokenization method to break down an employees name
+    //Tokenization method to break down an employees name into tokens
     public List<String> tokenizeEmployeeName(final String name) {
         List<String> tokens = new ArrayList<>();
-        //O(n)^2
+        //Not efficient, but most straight forward way I can think of making a complete tokenizing system
         for (int i = 0; i < name.length(); i++) {
             for (int j = i + 1; j <= name.length(); j++) {
                 tokens.add(name.substring(i, j));
@@ -86,21 +80,29 @@ public class EmployeeManager {
         return tokens;
     }
 
+    //Adds a new employee to our data structures
     public void addEmployee(Employee employee) {
         employeeMap.put(employee.getId(), employee);
         employeeTreeSet.add(employee);
 
+        //Tokenize the employee name and add to the inverted index
         String name = employee.getName().toLowerCase();
         for (String token : tokenizeEmployeeName(name)) {
             invertedIndex.computeIfAbsent(token, k -> new HashSet<>()).add(employee);
         }
     }
 
+    //Removes an employee from our data structures
     public void removeEmployee(final String id) {
         if (employeeMap.containsKey(id)) {
             Employee employee = employeeMap.get(id);
             employeeMap.remove(id);
             employeeTreeSet.remove(employee);
+
+            // Remove relevant tokens from inverted index
+            for (String token : tokenizeEmployeeName(employee.getName())) {
+                invertedIndex.remove(token);
+            }
         }
     }
 }

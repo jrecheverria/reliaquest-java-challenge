@@ -57,4 +57,9 @@ class EmployeeManagerTest {
         assertEquals("Arya Stark", result.get(3).getName());
     }
 
+    @Test
+    void testGetEmployeesByName_No_Matches() {
+        List<Employee> result = employeeManager.getEmployeesByNameSearch("Sansa");
+        assertEquals(0, result.size());
+    }
 }

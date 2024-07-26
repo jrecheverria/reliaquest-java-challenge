@@ -37,7 +37,7 @@ public class EmployeeController implements IEmployeeController {
     public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) {
         ResponseEntity<List<Employee>> employees =  new ResponseEntity<>(employeeService.getEmployeesByNameSearch(searchString), HttpStatus.OK);
         logger.info("Successfully retrieved all employees by search string {}", searchString);
-        return employees
+        return employees;
     }
 
     @Override

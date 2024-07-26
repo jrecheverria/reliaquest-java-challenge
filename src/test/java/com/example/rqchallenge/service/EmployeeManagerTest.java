@@ -62,4 +62,14 @@ class EmployeeManagerTest {
         List<Employee> result = employeeManager.getEmployeesByNameSearch("Sansa");
         assertEquals(0, result.size());
     }
+
+    @Test
+    void testTokenizeEmployeeName() {
+        String name = "Jon";
+        List<String> tokens = employeeManager.tokenizeEmployeeName(name);
+        List<String> expectedTokens = Arrays.asList(
+                "J", "Jo", "Jon", "o", "on", "n"
+        );
+        assertEquals(expectedTokens, tokens);
+    }
 }

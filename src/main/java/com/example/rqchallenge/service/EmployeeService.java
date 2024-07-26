@@ -1,9 +1,7 @@
 package com.example.rqchallenge.service;
 
-import com.example.rqchallenge.model.DeleteEmployeeResponse;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.model.EmployeeResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -51,5 +49,9 @@ public class EmployeeService {
 
     public Integer getHighestSalary() {
         return employeeManager.getHighestSalary();
+    }
+
+    public List<String> getTopTenHighestEarningEmployeeNames() {
+        return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 }

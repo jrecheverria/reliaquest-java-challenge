@@ -30,4 +30,19 @@ public class EmployeeManager {
         throw new NoSuchElementException("No employees found in the priority queue.");
     }
 
+    public List<String> getTopTenHighestEarningEmployeeNames() {
+        if (employeePriorityQueue.size() >= 10) {
+            List<String> topTenEaringEmployees = new ArrayList<>();
+            int count = 0;
+            while (!employeePriorityQueue.isEmpty() && count < 10) {
+                Employee employee = employeePriorityQueue.poll();
+                topTenEaringEmployees.add(employee.getName());
+                employeePriorityQueue.offer(employee);
+                count++;
+            }
+            return topTenEaringEmployees;
+        }
+        throw new NoSuchElementException("Not enough employees found in data to retrieve top 10 salaries.");
+    }
+
 }

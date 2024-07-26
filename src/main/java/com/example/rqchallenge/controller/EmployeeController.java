@@ -50,7 +50,12 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
-        return null;
+        try {
+            List<String> topTenHighestEarningEmployeeNames = employeeService.getTopTenHighestEarningEmployeeNames();
+            return new ResponseEntity<>(topTenHighestEarningEmployeeNames, HttpStatus.OK);
+        } catch (NoSuchElementException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PostMapping("/create")

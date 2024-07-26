@@ -100,7 +100,6 @@ public class EmployeeService {
         employeeManager.getEmployeeMap().put(employee.getId(), employee);
         employeeManager.getEmployeeTreeSet().add(employee);
         employeeManager.getEmployeeNameMap().put(employee.getName(), employee);
-        employeeManager.rebuildTrie();
 
         return successStatus;
     }
@@ -123,7 +122,6 @@ public class EmployeeService {
             employeeManager.getEmployeeMap().remove(id);
             employeeManager.getEmployeeTreeSet().remove(employee);
             employeeManager.getEmployeeNameMap().remove(employee.getName());
-            employeeManager.rebuildTrie();
         }
         return responseEntity.getBody().getMessage();
     }

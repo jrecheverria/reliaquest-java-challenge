@@ -1,7 +1,6 @@
 package com.example.rqchallenge.service;
 
 import com.example.rqchallenge.model.Employee;
-import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -23,9 +22,6 @@ public class EmployeeManager {
     //HashMap for quick lookup and construction of Trie for text search
     private final Map<String, Employee> employeeNameMap = new HashMap<>();
 
-    //AhoCorasickDoubleArrayTrie for lightning fast text search
-    private final AhoCorasickDoubleArrayTrie<Employee> acdat = new AhoCorasickDoubleArrayTrie<>();
-
 
     public void populateEmployeeData(List<Employee> employeeList) {
         employeeList.forEach(employee -> {
@@ -33,11 +29,6 @@ public class EmployeeManager {
             employeeTreeSet.add(employee);
             employeeNameMap.put(employee.getName(), employee);
         });
-        acdat.build(employeeNameMap);
-    }
-
-    public void rebuildTrie() {
-        acdat.build(employeeNameMap);
     }
 
     public Integer getHighestSalary() {
@@ -63,7 +54,6 @@ public class EmployeeManager {
     }
 
     public List<Employee> getEmployeesByNameSearch(final String searchString) {
-        List<AhoCorasickDoubleArrayTrie.Hit<Employee>> wordList = acdat.parseText(searchString);
         return null;
     }
 }

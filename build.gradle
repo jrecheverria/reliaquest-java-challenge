@@ -24,9 +24,6 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.11'
     implementation 'ch.qos.logback:logback-core:1.2.11'
 
-    // Aho-Corasick Double Array Trie
-    implementation 'com.hankcs:aho-corasick-double-array-trie:1.2.2'
-
     // Lombok
     compileOnly 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'

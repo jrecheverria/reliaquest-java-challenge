@@ -360,3 +360,6 @@ java.lang.NullPointerException: Cannot invoke "java.util.List.get(int)" because 
 2024-07-26 11:23:19 - Initializing Servlet 'dispatcherServlet'
 2024-07-26 11:23:19 - Completed initialization in 1 ms
 2024-07-26 11:23:20 - Successfully retrieved all employees by search string on
+2024-07-26 15:30:38 - Starting RqChallengeApplicationTests using Java 15.0.10 on Rubens-Air.lan with PID 15317 (started by rubenecheverria in /Users/rubenecheverria/IdeaProjects/java-employee-challenge)
+2024-07-26 15:30:38 - No active profile set, falling back to default profiles: default
+2024-07-26 15:30:39 - Started RqChallengeApplicationTests in 0.698 seconds (JVM running for 1.23)

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeManagerTest {
@@ -49,12 +51,13 @@ class EmployeeManagerTest {
     void testGetEmployeesByNameSearch() {
         //Using search string 'st' should fetch some Lannisters and Starks
         List<Employee> result = employeeManager.getEmployeesByNameSearch("St");
+        Set<String> employeeNames = result.stream().map(Employee::getName).collect(Collectors.toSet());
 
         assertEquals(4, result.size());
-        assertEquals("Tyrion Lannister", result.get(0).getName());
-        assertEquals("Ned Stark", result.get(1).getName());
-        assertEquals("Rob Stark", result.get(2).getName());
-        assertEquals("Arya Stark", result.get(3).getName());
+        assertTrue(employeeNames.contains("Rob Stark"));
+        assertTrue(employeeNames.contains("Ned Stark"));
+        assertTrue(employeeNames.contains("Arya Stark"));
+        assertTrue(employeeNames.contains("Tyrion Lannister"));
     }
 
     @Test

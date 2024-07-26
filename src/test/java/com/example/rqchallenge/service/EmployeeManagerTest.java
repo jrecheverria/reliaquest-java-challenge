@@ -23,4 +23,14 @@ class EmployeeManagerTest {
         );
         employeeManager.populateEmployeeData(employeeList);
     }
+
+    @Test
+    void testPopulateEmployeeData() {
+        assertFalse(employeeManager.getInvertedIndex().isEmpty());
+    }
+
+    @Test
+    void testGetHighestSalary() {
+        assertEquals(employeeManager.getHighestSalary(), 130000);
+    }
 }

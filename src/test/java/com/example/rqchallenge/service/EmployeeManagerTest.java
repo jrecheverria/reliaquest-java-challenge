@@ -75,4 +75,27 @@ class EmployeeManagerTest {
         );
         assertEquals(expectedTokens, tokens);
     }
+
+    @Test
+    void testAddEmployee() {
+        Employee newEmployee = new Employee("7", "Sansa Stark", "90000", "24", "Winterfell.jpg");
+        employeeManager.addEmployee(newEmployee);
+
+        assertTrue(employeeManager.getEmployeeMap().containsKey("7"));
+        assertTrue(employeeManager.getEmployeeTreeSet().contains(newEmployee));
+
+        Set<Employee> sansaSet = employeeManager.getInvertedIndex().get("sansa");
+        assertNotNull(sansaSet);
+        assertTrue(sansaSet.contains(newEmployee));
+    }
+
+    @Test
+    void testRemoveEmployee() {
+        Employee employeeToRemove = new Employee("1", "Jon Snow", "100000", "28", "CastleBlack.jpg");
+        employeeManager.removeEmployee("1");
+
+        assertFalse(employeeManager.getEmployeeMap().containsKey("1"));
+        assertFalse(employeeManager.getEmployeeTreeSet().contains(employeeToRemove));
+        assertFalse(employeeManager.getInvertedIndex().containsKey("jon"));
+    }
 }

@@ -69,7 +69,8 @@ public class EmployeeManager {
     }
 
     //Tokenization method to break down an employees name into tokens
-    public List<String> tokenizeEmployeeName(final String name) {
+    public List<String> tokenizeEmployeeName(String name) {
+        name = name.toLowerCase();
         List<String> tokens = new ArrayList<>();
         //Not efficient, but most straight forward way I can think of making a complete tokenizing system
         for (int i = 0; i < name.length(); i++) {
@@ -86,14 +87,14 @@ public class EmployeeManager {
         employeeTreeSet.add(employee);
 
         //Tokenize the employee name and add to the inverted index
-        String name = employee.getName().toLowerCase();
+        String name = employee.getName();
         for (String token : tokenizeEmployeeName(name)) {
             invertedIndex.computeIfAbsent(token, k -> new HashSet<>()).add(employee);
         }
     }
 
     //Removes an employee from our data structures
-    public void removeEmployee(final String id) {
+    public void removeEmployee(String id) {
         if (employeeMap.containsKey(id)) {
             Employee employee = employeeMap.get(id);
             employeeMap.remove(id);

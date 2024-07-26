@@ -33,4 +33,14 @@ class EmployeeManagerTest {
     void testGetHighestSalary() {
         assertEquals(employeeManager.getHighestSalary(), 130000);
     }
+
+    @Test
+    void testGetTopTenHighestEarningEmployeeNames() {
+        List<String> topEmployees = employeeManager.getTopTenHighestEarningEmployeeNames();
+        List<String> expectedNames = Arrays.asList(
+                "Daenerys Targaryen", "Arya Stark", "Tyrion Lannister", "Jon Snow"
+        );
+        assertEquals(expectedNames, topEmployees);
+    }
+
 }

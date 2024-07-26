@@ -27,7 +27,6 @@ public class EmployeeManager {
 
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 
-
     public void populateEmployeeData(List<Employee> employeeList) {
         employeeList.forEach(employee -> {
             employeeMap.put(employee.getId(), employee);
@@ -76,7 +75,7 @@ public class EmployeeManager {
     }
 
     //Tokenization method to break down an employees name
-    private List<String> tokenizeEmployeeName(final String name) {
+    public List<String> tokenizeEmployeeName(final String name) {
         List<String> tokens = new ArrayList<>();
         //O(n)^2
         for (int i = 0; i < name.length(); i++) {

@@ -31,11 +31,15 @@ public class EmployeeService {
 
         List<Employee> employeeList = responseEntity.getBody().getData();
 
-        // When fetching all employees for the first time, I will load them into memory
+        // When fetching all employees for the first time, I will load them into memory for "caching"
         if(employeeManager.getEmployeeTreeSet().isEmpty()) {
             employeeManager.populateEmployeeData(employeeList);
         }
         return employeeList;
+    }
+
+    public List<Employee> getEmployeesByNameSearch(final String searchString) {
+        return employeeManager.getEmployeesByNameSearch(searchString);
     }
 
     public Employee getEmployeeByID(final String id) {
@@ -61,7 +65,7 @@ public class EmployeeService {
         return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 
-    public String createEmployee(Map<String, Object> employeeInput) {
+    public String createEmployee(final Map<String, Object> employeeInput) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -74,9 +78,12 @@ public class EmployeeService {
         );
         String successStatus = responseEntity.getBody().getStatus();
 
+        //Adding the new employee to our data structures
         Employee employee = responseEntity.getBody().getData().get(0);
-        employeeManager.getEmployeeMap().put((String) employee.getId(), employee);
+        employeeManager.getEmployeeMap().put(employee.getId(), employee);
         employeeManager.getEmployeeTreeSet().add(employee);
+        employeeManager.getEmployeeNameMap().put(employee.getName(), employee);
+        employeeManager.rebuildTrie();
 
         return successStatus;
     }
@@ -96,9 +103,9 @@ public class EmployeeService {
         //If the employee happens to exist in our "cache", well remove it
         if(employeeManager.getEmployeeMap().containsKey(id)) {
             Employee employee = employeeManager.getEmployeeMap().get(id);
-
             employeeManager.getEmployeeMap().remove(id);
             employeeManager.getEmployeeTreeSet().remove(employee);
+            employeeManager.rebuildTrie();
         }
         return responseEntity.getBody().getMessage();
     }

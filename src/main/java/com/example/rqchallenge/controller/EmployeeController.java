@@ -27,9 +27,10 @@ public class EmployeeController implements IEmployeeController {
         return new ResponseEntity<>(employeeService.getAllEmployees(), HttpStatus.OK);
     }
 
+    @GetMapping("/employees/search/{searchString}")
     @Override
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(String searchString) {
-        return null;
+    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) {
+        return new ResponseEntity<>(employeeService.getEmployeesByNameSearch(searchString), HttpStatus.OK);
     }
 
     @Override

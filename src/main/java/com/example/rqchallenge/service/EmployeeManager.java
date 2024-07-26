@@ -1,6 +1,7 @@
 package com.example.rqchallenge.service;
 
 import com.example.rqchallenge.model.Employee;
+import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
@@ -12,18 +13,31 @@ import java.util.*;
 @Setter
 public class EmployeeManager {
 
-    //Two data structures to act as a sort of caching mechanism to save time on our API call
     //HashMap for quick lookup based on employee ID
     private final Map<String, Employee> employeeMap = new HashMap<>();
+
     //TreeSet for constant order and quick look up of employees based on salary
     private final TreeSet<Employee> employeeTreeSet = new TreeSet<>(
                 (e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
+
+    //HashMap for quick lookup and construction of Trie for text search
+    private final TreeMap<String, Employee> employeeNameMap = new TreeMap<>();
+
+    //AhoCorasickDoubleArrayTrie for lightning fast text search
+    private final AhoCorasickDoubleArrayTrie<Employee> acdat = new AhoCorasickDoubleArrayTrie<Employee>();
+
 
     public void populateEmployeeData(List<Employee> employeeList) {
         employeeList.forEach(employee -> {
             employeeMap.put(employee.getId(), employee);
             employeeTreeSet.add(employee);
+            employeeNameMap.put(employee.getName(), employee);
         });
+        acdat.build(employeeNameMap);
+    }
+
+    public void rebuildTrie() {
+        acdat.build(employeeNameMap);
     }
 
     public Integer getHighestSalary() {
@@ -46,5 +60,10 @@ public class EmployeeManager {
             return topEmployees;
         }
         throw new NoSuchElementException("Not enough employees found in data to retrieve top 10 salaries.");
+    }
+
+    public List<Employee> getEmployeesByNameSearch(final String searchString) {
+        List<AhoCorasickDoubleArrayTrie.Hit<Employee>> wordList = acdat.parseText(searchString);
+        return null;
     }
 }

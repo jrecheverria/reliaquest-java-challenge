@@ -21,10 +21,10 @@ public class EmployeeManager {
                 (e1, e2) -> Integer.compare(Integer.parseInt(e2.getSalary()), Integer.parseInt(e1.getSalary())));
 
     //HashMap for quick lookup and construction of Trie for text search
-    private final TreeMap<String, Employee> employeeNameMap = new TreeMap<>();
+    private final Map<String, Employee> employeeNameMap = new HashMap<>();
 
     //AhoCorasickDoubleArrayTrie for lightning fast text search
-    private final AhoCorasickDoubleArrayTrie<Employee> acdat = new AhoCorasickDoubleArrayTrie<Employee>();
+    private final AhoCorasickDoubleArrayTrie<Employee> acdat = new AhoCorasickDoubleArrayTrie<>();
 
 
     public void populateEmployeeData(List<Employee> employeeList) {

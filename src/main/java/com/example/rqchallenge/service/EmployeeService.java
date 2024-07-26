@@ -3,8 +3,6 @@ package com.example.rqchallenge.service;
 import com.example.rqchallenge.model.DeleteEmployeeResponse;
 import com.example.rqchallenge.model.Employee;
 import com.example.rqchallenge.model.EmployeeResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -43,10 +41,11 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeesByNameSearch(final String searchString) {
+        if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
         return employeeManager.getEmployeesByNameSearch(searchString);
     }
 
-    public Employee getEmployeeByID(final String id) throws RestClientException {
+    public Employee getEmployeeByID(final String id) {
         // If employee already exists in our system, we can return the value from our "cache"
         if(employeeManager.getEmployeeMap().containsKey(id)) {
             return employeeManager.getEmployeeMap().get(id);
@@ -64,14 +63,18 @@ public class EmployeeService {
     }
 
     public Integer getHighestSalary() {
+        //If a user trys to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
+        if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
         return employeeManager.getHighestSalary();
     }
 
     public List<String> getTopTenHighestEarningEmployeeNames() {
+        //If a user trys to fetch the highest salary without having the employee data populated, we will perform a 'prefetch'
+        if(employeeManager.getEmployeeMap().isEmpty()) { getAllEmployees(); }
         return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 
-    public String createEmployee(final Map<String, Object> employeeInput) throws RestClientException {
+    public String createEmployee(final Map<String, Object> employeeInput) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -111,6 +114,7 @@ public class EmployeeService {
             Employee employee = employeeManager.getEmployeeMap().get(id);
             employeeManager.getEmployeeMap().remove(id);
             employeeManager.getEmployeeTreeSet().remove(employee);
+            employeeManager.getEmployeeNameMap().remove(employee.getName());
             employeeManager.rebuildTrie();
         }
         return responseEntity.getBody().getMessage();

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -34,7 +33,7 @@ public class EmployeeController implements IEmployeeController {
 
     @GetMapping("/search/{searchString}")
     @Override
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) throws IOException {
+    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) {
         ResponseEntity<List<Employee>> employees =  new ResponseEntity<>(employeeService.getEmployeesByNameSearch(searchString), HttpStatus.OK);
         logger.info("Successfully retrieved all employees by search string {}", searchString);
         return employees;
@@ -42,7 +41,7 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) throws IOException {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) {
         ResponseEntity<Employee> employeeById = new ResponseEntity<>(employeeService.getEmployeeByID(id), HttpStatus.OK);
         logger.info("Successfully retrieved employee with id {}", id);
         return employeeById;
@@ -82,7 +81,7 @@ public class EmployeeController implements IEmployeeController {
 
     @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) throws IOException {
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) {
         ResponseEntity<String> deletedEmployee = new ResponseEntity<>(employeeService.deleteEmployeeByID(id), HttpStatus.OK);
         logger.info("Successfully deleted employee with id {}.", id);
         return deletedEmployee;

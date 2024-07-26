@@ -34,7 +34,7 @@ public class EmployeeController implements IEmployeeController {
 
     @GetMapping("/search/{searchString}")
     @Override
-    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) {
+    public ResponseEntity<List<Employee>> getEmployeesByNameSearch(@PathVariable String searchString) throws IOException {
         ResponseEntity<List<Employee>> employees =  new ResponseEntity<>(employeeService.getEmployeesByNameSearch(searchString), HttpStatus.OK);
         logger.info("Successfully retrieved all employees by search string {}", searchString);
         return employees;
@@ -42,13 +42,13 @@ public class EmployeeController implements IEmployeeController {
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) {
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable final String id) throws IOException {
         ResponseEntity<Employee> employeeById = new ResponseEntity<>(employeeService.getEmployeeByID(id), HttpStatus.OK);
         logger.info("Successfully retrieved employee with id {}", id);
         return employeeById;
     }
 
-    @GetMapping("/top-salary")
+    @GetMapping("/highestSalary")
     @Override
     public ResponseEntity<Integer> getHighestSalaryOfEmployees() {
         try {
@@ -60,7 +60,7 @@ public class EmployeeController implements IEmployeeController {
         }
     }
 
-    @GetMapping("/top-ten-names-by-salary")
+    @GetMapping("/topTenHighestEarningEmployeeNames")
     @Override
     public ResponseEntity<List<String>> getTopTenHighestEarningEmployeeNames() {
         try {
@@ -72,7 +72,7 @@ public class EmployeeController implements IEmployeeController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping()
     @Override
     public ResponseEntity<String> createEmployee(final Map<String, Object> employeeInput) {
         ResponseEntity<String> createdEmployee = new ResponseEntity<>(employeeService.createEmployee(employeeInput), HttpStatus.CREATED);
@@ -80,9 +80,9 @@ public class EmployeeController implements IEmployeeController {
         return createdEmployee;
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     @Override
-    public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) {
+    public ResponseEntity<String> deleteEmployeeById(@PathVariable final String id) throws IOException {
         ResponseEntity<String> deletedEmployee = new ResponseEntity<>(employeeService.deleteEmployeeByID(id), HttpStatus.OK);
         logger.info("Successfully deleted employee with id {}.", id);
         return deletedEmployee;

@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class EmployeeService {
         this.employeeManager = employeeManager;
     }
 
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() throws RestClientException {
         ResponseEntity<EmployeeResponse> responseEntity = restTemplate.getForEntity(
                 GET_ALL_EMPLOYEE_DATA_URL,
                 EmployeeResponse.class);
@@ -45,7 +46,7 @@ public class EmployeeService {
         return employeeManager.getEmployeesByNameSearch(searchString);
     }
 
-    public Employee getEmployeeByID(final String id) {
+    public Employee getEmployeeByID(final String id) throws RestClientException {
         // If employee already exists in our system, we can return the value from our "cache"
         if(employeeManager.getEmployeeMap().containsKey(id)) {
             return employeeManager.getEmployeeMap().get(id);
@@ -70,7 +71,7 @@ public class EmployeeService {
         return employeeManager.getTopTenHighestEarningEmployeeNames();
     }
 
-    public String createEmployee(final Map<String, Object> employeeInput) {
+    public String createEmployee(final Map<String, Object> employeeInput) throws RestClientException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -97,7 +98,7 @@ public class EmployeeService {
     in their Get All Employees API. As a result, I will still send the DELETE HTTP Request to their endpoint,
     and check whether we are storing that employee ID in memory. If we happen to have it, I will eject it.
     */
-    public String deleteEmployeeByID(final String id) {
+    public String deleteEmployeeByID(final String id) throws RestClientException {
         ResponseEntity<DeleteEmployeeResponse> responseEntity = restTemplate.exchange(
                 DELETE_EMPLOYEE_DATA_BY_ID_URL + id,
                 HttpMethod.DELETE,

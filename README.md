@@ -1,6 +1,6 @@
 # Coding Challenge Solution
 
-In this coding challenge, I have successfully implemented the methods declared in the `IEmployeeController` interface. Below, you'll find details about the solution, including handling rate limiting, logging, and unit tests.
+In this coding challenge, I have successfully implemented the controller methods declared in the `IEmployeeController` interface. Below, you'll find details about the solution, including handling rate limiting, logging, and unit tests.
 
 ## Rate Limiting Handling
 

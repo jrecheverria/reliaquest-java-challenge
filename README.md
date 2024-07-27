@@ -1,118 +1,29 @@
-# Coding Challenge
+# Coding Challenge Solution
 
-### In this assessment you will be tasked with filling out the functionality of different methods that will be listed further down.
-These methods will require some level of api interactions with the following base url: https://dummy.restapiexample.com.
-Please keep the following in mind when doing this assessment: clean coding practices, test driven development, logging, and scalability.
-If you are unable to successfully receive responses from the endpoints, mocking the response calls may prove to be helpful.
+In this coding challenge, I have successfully implemented the methods declared in the `IEmployeeController` interface. Below, you'll find details about the solution, including handling rate limiting, logging, and unit tests.
 
-### Endpoints to implement
+## Rate Limiting Handling
 
-getAllEmployees()
+Please be aware that the external service `https://dummy.restapiexample.com` imposes heavy rate limits on incoming requests. To manage this, I have implemented a global exception handler that catches rate limit errors and sends a generic error message back to the client:
 
-    output - list of employees
-    description - this should return all employees
+```json
+"An error occurred while calling an external service."
+```
 
-getEmployeesByNameSearch()
+## Logging
 
-    output - list of employees
-    description - this should return all employees whose name contains or matches the string input provided
+Logging has been implemented for most critical operations using Log4j. Log output is directed to the logs folder, providing detailed information about the application's behavior and facilitating debugging and monitoring.
 
-getEmployeeById(string id)
+## Unit Tests
 
-    output - employee
-    description - this should return a single employee
+Unit tests have been written to ensure the robustness and reliability of the EmployeeService and EmployeeManager classes. These tests cover various scenarios and edge cases, verifying that the implemented methods function as expected.
 
-getHighestSalaryOfEmployees()
+## Insomnia/Postman Collection
 
-    output - integer of the highest salary
-    description -  this should return a single integer indicating the highest salary of all employees
+For convenience, I have included a file named ReliaQuest-Java-Insomnia-Collection.json. This file contains a collection of JSON requests that you can use to interact with the endpoints easily. You can import this JSON file into either Insomnia or Postman.
 
-getTop10HighestEarningEmployeeNames()
-
-    output - list of employees
-    description -  this should return a list of the top 10 employees based off of their salaries
-
-createEmployee(string name, string salary, string age)
-
-    output - string of the status (i.e. success)
-    description -  this should return a status of success or failed based on if an employee was created
-
-deleteEmployee(String id)
-
-    output - the name of the employee that was deleted
-    description - this should delete the employee with specified id given
-
-### External endpoints from base url
-#### This section will outline all available endpoints and their request and response models from https://dummy.restapiexample.com
-/employees
-
-    request:
-        method: GET
-        parameters: n/a
-        full route: https://dummy.restapiexample.com/api/v1/employees
-    response:
-        {
-            "status": "success",
-            "data": [
-                {
-                "id": "1",
-                "employee_name": "Tiger Nixon",
-                "employee_salary": "320800",
-                "employee_age": "61",
-                "profile_image": ""
-                },
-                ....
-            ]
-        }
-
-/employee/{id}
-
-    request:
-        method: GET
-        parameters: 
-            id (String)
-        full route: https://dummy.restapiexample.com/api/v1/employee/{id}
-    response: 
-        {
-            "status": "success",
-            "data": {
-                "id": "1",
-                "employee_name": "Foo Bar",
-                "employee_salary": "320800",
-                "employee_age": "61",
-                "profile_image": ""
-            }
-        }
-
-/create
-
-    request:
-        method: POST
-        parameters: 
-            name (String),
-            salary (String),
-            age (String)
-        full route: https://dummy.restapiexample.com/api/v1/create
-    response:
-        {
-            "status": "success",
-            "data": {
-                "name": "test",
-                "salary": "123",
-                "age": "23",
-                "id": 25
-            }
-        }
-
-/delete/{id}
-
-    request:
-        method: DELETE
-        parameters:
-            id (String)
-        full route: https://dummy.restapiexample.com/api/v1/delete/{id}
-    response:
-        {
-            "status": "success",
-            "message": "successfully! deleted Record"
-        }
+## How to Use
+1. Import the JSON Collection: Import the ReliaQuest-Java-Insomnia-Collection.json file into Insomnia or Postman to interact with the implemented endpoints effortlessly.
+2. Run the Application: Start the application as you normally would.
+3. Check Logs: Monitor the logs folder for detailed information about the application's operations and any potential issues.
+4. Execute Unit Tests: Run the unit tests to ensure that all functionalities are working correctly and to verify the integrity of the application.
